@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=uno -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S "/Users/emily_shen/Desktop/UPenn/2023 Spring/Classes/ESE3500/Labs/Lab 3/lab3-shenyit-main" -B "/Users/emily_shen/Desktop/UPenn/2023 Spring/Classes/ESE3500/Labs/Lab 3/lab3-shenyit-main/cmake-build-uno"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/emily_shen/Desktop/UPenn/2023 Spring/Classes/ESE3500/Labs/Lab 3/lab3-shenyit-main/cmake-build-uno
