@@ -1,15 +1,12 @@
 # Theremin
-Link to video: https://drive.google.com/file/d/1n7I4-Y9V4vYUwFG5ijM8VgV-SbyNEozc/view?usp=sharing
-
-Comments:
-The link is a demo video of the various functionalities of my program. I first show the program in continuous mode. Then, I use a button for mode selection. By pressing the button, I go from continuous mode to discrete mode. If I press the button again, it will go back to continuous mode. I also show the volume control by using the photoresistor, so that when light is shone on the photoresistor, the volume is louder, and when I cover the photoresistor with my hand, the volume is softer. The volume is controlled in a discrete manner according to the ranges in question 16. I also show in my video that the frequencies are still able to be changed simultaneously as I change the volume.
-In my code, no other files were used, as all the code is in main.c. Furthermore, I prescaled Timer0 by 64 and I prescaled Timer1 by 8.
-The code is composed of seven sections. First, there is a section that allows us to print things in the serial monitor. This section is labelled as UART in the code, and is closely modeled by the UART file we used in Lab 2.
 The initialize function is to set up everything before we enter the main while loop. We set up the ADC so that we are able to read values from the photoresistor that tell us how bright or how dim it is, and then translate these values into duty cycle so that we can modify how loud the buzzer is. The ultrasonic sensor pins Trig and Echo are initialized to be PB1 and PB2 respectively. I then initialized Timer1, which is used for capturing when the Echo pin is high and low. PD5 is set up as output for the buzzer and PD7 is set up as output for the button which will toggle the modes between continuous and discrete. Timer0 is set up as Fast PWM and prescaled by 64. Note that this is different from Part D and E, where Timer0 is set up as Phase Correct PWM. This section was changed for the final design for Part F. Finally, I also initialize toggle as 0 and set up PA0 as the input pin for ADC.
-37
-  37
+
 The measure_dist() function measures distance. It first sets Trig as HIGH for 10 us. Then, it waits until Echo is HIGH. When this happens, TCNT1 is reset to 0. Then it waits until Echo is LOW. When this happens, it checks for the current value of TCNT1 and uses this to calculate distance.
+
 The discrete_mode() function sets the OCR0A value to a specific discrete value depending on what the value of reference is. Note that the reference variable was used originally when I was using Phase Correct, which is why the values are around 4 times less than the actual OCR0A value. This is because the OCR0A value for Fast PWM is four times greater than the OCR0A value for Phase Correct, so when changing my code from Part D - E to Part F, I multiplied all my OCR0A values by 4 as I am now using Fast PWM instead of Phase Correct PWM.
+
 The measure_ADC() function measures ADC and stores it in a variable. The function also restarts the conversion.
+
 The dutyCycleADC() function converts the ADC value measured into a duty cycle in discrete ranges.
+
 In the main function, a variable keeps track of the distance measured. In order to toggle between continuous and discrete mode, there is also an if statement that checks if the button has been pressed. If it has been pressed, depending on the value of toggle, it will change to the other mode and then change the value of toggle so that the next time the button is pressed, the mode will revert back to the original mode. Then there are if statements that check for the value of toggle. If it is 0, then continuous mode is used. If it is 1, then discrete mode is used. The frequency is done by using the OCR0A and the volume control is done by using OCR0B, which takes in the duty cycle calculated.
